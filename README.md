@@ -14,6 +14,11 @@ This work is built around one practical idea:
 
 > People cannot interrupt a pattern they have never been taught to see.
 
+## Featured Showcase
+
+- **[Repository Showcase Webpage](./repo-showcase.html)** — visual landing page for the top WRH, memoir, curriculum, pilot, article, and production repositories.
+- **[Start Here Repository Map](./START-HERE.md)** — guided map for procurement, pilot partners, readers, reviewers, and production users.
+
 ## Primary Project Areas
 
 ### WRH Curriculum and Pilot Materials
@@ -32,10 +37,6 @@ This work is built around one practical idea:
 ## Scope Boundary
 
 WRH materials are **not therapy**, **not medical advice**, and **not a replacement for licensed clinical care**. The work is designed as non-clinical education, language-building, pattern recognition, facilitator support, and implementation documentation.
-
-## Start Here
-
-For a guided map of the repositories, see **[START-HERE.md](./START-HERE.md)**.
 
 ---
 
