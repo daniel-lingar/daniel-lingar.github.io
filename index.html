@@ -5,768 +5,674 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Capitol Contracts LLC / WRH Project System</title>
   <meta name="description" content="Capitol Contracts LLC develops the What Really Happened (WRH) project system: non-clinical psychoeducational curriculum for recovery, veteran-support, reentry, peer-support, and institutional training partners." />
-
   <style>
     :root {
-      --bg: #05040a;
-      --bg-soft: #0b0914;
-      --panel: rgba(18, 16, 28, 0.78);
-      --panel-soft: rgba(255,255,255,0.04);
-      --text: #f7f4ea;
-      --muted: #c9c1d8;
-      --gold: #d8b45f;
-      --gold-soft: rgba(216, 180, 95, 0.14);
-      --purple: #8f5cff;
-      --purple-soft: rgba(143, 92, 255, 0.14);
-      --line: rgba(255,255,255,0.10);
-      --line-strong: rgba(255,255,255,0.18);
-      --shadow: rgba(0,0,0,0.40);
-      --max: 1380px;
+      --bg: #ffffff;
+      --bg-soft: #f8f9fa;
+      --text: #1e293b;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --accent: #991b1b;
+      --accent-dark: #7f1d1d;
+      --max: 1180px;
     }
 
     * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 8% 8%, rgba(143, 92, 255, 0.18), transparent 22rem),
-        radial-gradient(circle at 92% 10%, rgba(216, 180, 95, 0.16), transparent 24rem),
-        linear-gradient(180deg, #05040a 0%, #080611 38%, #090712 68%, #05040a 100%);
+      background: var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
     }
 
     a { color: inherit; }
 
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 12px;
+      background: var(--text);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .skip-link:focus { left: 12px; }
+
     .shell {
-      width: min(calc(100vw - 40px), var(--max));
+      width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
-      padding: 22px 0 56px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,.98);
     }
 
     .nav {
+      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 10px 0 22px;
+      gap: 24px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
       color: var(--text);
-      font-weight: 900;
-      letter-spacing: 0.01em;
+      font-weight: 800;
+      letter-spacing: -0.01em;
     }
 
     .brand-mark {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      border-radius: 50%;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      box-shadow: 0 0 28px rgba(216, 180, 95, 0.16);
-      font-size: 0.78rem;
+      border-radius: 10px;
+      background: var(--text);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 900;
     }
 
     .nav-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
       align-items: center;
+      justify-content: flex-end;
+      gap: 22px;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: .94rem;
       font-weight: 700;
     }
 
-    .nav-links a:hover {
-      color: var(--gold);
-    }
+    .nav-links a:hover,
+    .nav-links a:focus { color: var(--text); }
+
+    main { background: var(--bg); }
 
     .hero {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 36px;
-      align-items: center;
-      min-height: 72vh;
-      padding: 18px 0 24px;
-      position: relative;
+      padding: 88px 0 72px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .eyebrow {
-      display: inline-block;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.78rem;
-      font-weight: 900;
-      margin-bottom: 14px;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 8fr 4fr;
+      gap: 56px;
+      align-items: start;
     }
+
+    .kicker {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
 
     h1 {
-      margin: 0;
-      font-size: clamp(3rem, 5.4vw, 6.5rem);
-      line-height: 0.94;
-      letter-spacing: -0.065em;
       max-width: 900px;
-    }
-
-    .hero-copy p {
-      margin: 20px 0 0;
-      max-width: 860px;
-      color: var(--muted);
-      font-size: clamp(1.04rem, 1.5vw, 1.22rem);
-    }
-
-    .hero-copy strong {
+      margin-bottom: 22px;
       color: var(--text);
+      font-size: clamp(2.65rem, 5vw, 4.9rem);
+      line-height: .98;
+      letter-spacing: -0.055em;
+      font-weight: 900;
     }
 
-    .cta-row {
+    .lead {
+      max-width: 650px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions,
+    .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 28px;
     }
 
-    .btn {
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
+      min-height: 46px;
       padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: rgba(255,255,255,0.04);
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 0.94rem;
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-    }
-
-    .btn.primary {
-      border-color: transparent;
-      color: #0b0811;
-      background: linear-gradient(135deg, var(--gold), #f3dda0);
-    }
-
-    .hero-art {
-      position: relative;
-      min-height: 540px;
-      border-radius: 34px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 28% 24%, rgba(143, 92, 255, 0.34), transparent 18rem),
-        radial-gradient(circle at 78% 72%, rgba(216, 180, 95, 0.26), transparent 18rem),
-        linear-gradient(145deg, rgba(14,12,24,0.96), rgba(7,6,12,0.96));
-      border: 1px solid var(--line);
-      box-shadow: 0 22px 60px var(--shadow);
-      isolation: isolate;
-    }
-
-    .hero-art::before,
-    .hero-art::after {
-      content: "";
-      position: absolute;
-      inset: auto;
-      border-radius: 999px;
-      filter: blur(8px);
-      opacity: 0.9;
-    }
-
-    .hero-art::before {
-      width: 420px;
-      height: 420px;
-      right: -60px;
-      top: -70px;
-      background:
-        radial-gradient(circle, rgba(143, 92, 255, 0.26) 0%, rgba(143, 92, 255, 0.05) 45%, transparent 72%);
-    }
-
-    .hero-art::after {
-      width: 390px;
-      height: 390px;
-      left: -70px;
-      bottom: -90px;
-      background:
-        radial-gradient(circle, rgba(216, 180, 95, 0.22) 0%, rgba(216, 180, 95, 0.05) 42%, transparent 74%);
-    }
-
-    .art-core {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 34px;
-    }
-
-    .path-orbit {
-      position: relative;
-      width: min(100%, 440px);
-      aspect-ratio: 1 / 1;
-    }
-
-    .path-orbit .ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .path-orbit .ring.r2 { inset: 12%; }
-    .path-orbit .ring.r3 { inset: 24%; }
-
-    .path-line {
-      position: absolute;
-      inset: 11% 10%;
-      border-radius: 50%;
-      border-top: 2px solid rgba(216,180,95,0.72);
-      border-right: 2px solid rgba(143,92,255,0.62);
-      border-bottom: 2px solid rgba(216,180,95,0.20);
-      border-left: 2px solid rgba(143,92,255,0.18);
-      transform: rotate(-18deg);
-      box-shadow: 0 0 40px rgba(216,180,95,0.12);
-    }
-
-    .pulse {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f3dda0, var(--gold));
-      box-shadow: 0 0 20px rgba(216,180,95,0.55);
-    }
-
-    .pulse.p1 { top: 18%; left: 60%; }
-    .pulse.p2 { top: 46%; left: 74%; background: linear-gradient(135deg, #d8c8ff, var(--purple)); box-shadow: 0 0 20px rgba(143,92,255,0.52); }
-    .pulse.p3 { top: 72%; left: 42%; }
-    .pulse.p4 { top: 52%; left: 12%; background: linear-gradient(135deg, #d8c8ff, var(--purple)); box-shadow: 0 0 20px rgba(143,92,255,0.52); }
-
-    .art-caption {
-      position: absolute;
-      left: 28px;
-      bottom: 24px;
-      right: 28px;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .art-caption span:first-child {
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
       color: var(--text);
+      background: #fff;
+      text-decoration: none;
+      font-size: .95rem;
       font-weight: 800;
     }
 
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .button.primary:hover,
+    .button.primary:focus { background: var(--accent-dark); }
+
+    .hero-aside {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--bg-soft);
+    }
+
+    .hero-aside h2 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-aside p {
+      max-width: 650px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .meta-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .meta-list strong { color: var(--text); }
+
     .section {
-      padding: 64px 0 12px;
+      padding: 76px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-head {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 24px;
-      align-items: end;
-      margin-bottom: 26px;
+      grid-template-columns: 4fr 8fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 34px;
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(1.9rem, 3vw, 3.1rem);
-      line-height: 1.02;
+    h2 {
+      margin-bottom: 0;
+      color: var(--text);
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1.08;
       letter-spacing: -0.04em;
+      font-weight: 900;
     }
 
     .section-head p {
-      margin: 0;
+      max-width: 650px;
+      margin-bottom: 0;
       color: var(--muted);
-      font-size: 1.03rem;
-      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    .flow-band {
-      padding: 26px 28px;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.16);
-    }
-
-    .audience-grid {
+    .three-column {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 24px;
     }
 
-    .audience-item {
-      padding: 22px 0;
+    .plain-block {
+      padding-top: 20px;
+      border-top: 3px solid var(--text);
     }
 
-    .audience-item h3 {
-      margin: 0 0 8px;
-      font-size: 1.16rem;
+    .plain-block h3 {
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+      line-height: 1.25;
       letter-spacing: -0.02em;
     }
 
-    .audience-item p {
-      margin: 0;
+    .plain-block p {
+      max-width: 650px;
+      margin-bottom: 0;
       color: var(--muted);
     }
 
-    .audience-item .mini-line {
-      width: 44px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin-bottom: 12px;
-      border-radius: 999px;
-    }
-
-    .system-strip {
+    .timeline {
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 14px;
-      align-items: stretch;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
     }
 
     .step {
-      position: relative;
-      padding: 18px 18px 22px;
-      border-radius: 22px;
-      background: var(--panel-soft);
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow: hidden;
+      min-height: 230px;
+      padding: 24px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
     }
 
-    .step::before {
-      content: "";
-      position: absolute;
-      left: 18px;
-      top: 0;
-      width: 52px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      border-radius: 999px;
-    }
+    .step:last-child { border-right: 0; }
 
-    .step-num {
-      color: var(--gold);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
+    .step-number {
+      margin-bottom: 38px;
+      color: var(--muted);
+      font-size: .78rem;
       font-weight: 900;
-      margin-bottom: 8px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .step h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-      line-height: 1.1;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .repo-flow {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 26px;
-      align-items: start;
-    }
-
-    .repo-list {
-      display: grid;
-      gap: 18px;
-    }
-
-    .repo-row {
-      display: grid;
-      grid-template-columns: 220px 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 16px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .repo-row:last-child {
-      border-bottom: 0;
-    }
-
-    .repo-row .name {
-      font-weight: 900;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .repo-row .desc {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .repo-row a {
-      text-decoration: none;
-      color: var(--gold);
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .repo-side {
-      padding: 24px;
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(216,180,95,0.08), rgba(143,92,255,0.08));
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .repo-side h3 {
-      margin: 0 0 10px;
-      font-size: 1.3rem;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      line-height: 1.2;
       letter-spacing: -0.02em;
     }
 
-    .repo-side p,
-    .repo-side li {
+    .step p {
+      max-width: 650px;
+      margin-bottom: 0;
       color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.62;
     }
 
-    .repo-side ul {
-      margin: 14px 0 0;
-      padding-left: 18px;
-    }
-
-    .cta-panel {
+    .cards {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 26px;
-      align-items: center;
-      padding: 28px 30px;
-      border-radius: 28px;
-      background:
-        linear-gradient(135deg, rgba(216,180,95,0.10), rgba(143,92,255,0.10));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
     }
 
-    .cta-panel h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
+    .card {
+      min-height: 360px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
     }
 
-    .cta-panel p {
-      margin: 0;
+    .card-tag {
+      margin-bottom: 18px;
       color: var(--muted);
-      max-width: 860px;
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
-    .scope {
-      margin-top: 18px;
+    .card h3 {
+      margin-bottom: 12px;
+      color: var(--text);
+      font-size: 1.26rem;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      max-width: 650px;
       color: var(--muted);
-      font-size: 0.95rem;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: .98rem;
+      line-height: 1.65;
+    }
+
+    .card .button-row {
+      margin-top: auto;
+      padding-top: 22px;
+    }
+
+    .scope-box {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--text);
+      border-radius: 16px;
+      background: var(--bg-soft);
+    }
+
+    .scope-box h2 {
+      margin-bottom: 10px;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+    }
+
+    .scope-box p {
+      max-width: 800px;
+      margin-bottom: 0;
+      color: var(--muted);
     }
 
     footer {
-      margin-top: 42px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.92rem;
+      background: var(--text);
+      color: #e2e8f0;
+      padding: 40px 0;
     }
 
-    @media (max-width: 1100px) {
-      .hero,
-      .repo-flow,
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    footer h2 {
+      color: #fff;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    footer p {
+      max-width: 650px;
+      color: #cbd5e1;
+      margin-bottom: 0;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus { text-decoration: underline; }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
       .section-head,
-      .cta-panel {
+      .footer-grid {
         grid-template-columns: 1fr;
       }
 
-      .system-strip {
+      .timeline {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .repo-row {
-        grid-template-columns: 1fr;
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
       }
 
-      .repo-row a {
-        justify-self: start;
+      .step:nth-last-child(-n + 2) { border-bottom: 0; }
+
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 820px) {
-      .shell {
-        width: min(calc(100vw - 22px), var(--max));
-        padding-top: 14px;
-      }
+    @media (max-width: 720px) {
+      .shell { width: min(calc(100% - 28px), var(--max)); }
 
       .nav {
-        flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        flex-direction: column;
       }
 
-      .hero {
-        min-height: auto;
-        gap: 24px;
-        padding-top: 10px;
+      .nav-links {
+        justify-content: flex-start;
+        gap: 14px;
       }
 
-      .hero-art {
-        min-height: 380px;
-      }
+      .hero { padding: 56px 0; }
+      .section { padding: 56px 0; }
 
-      .section {
-        padding-top: 52px;
-      }
+      h1 { font-size: 2.65rem; }
+      h2 { font-size: 2rem; }
 
-      .audience-grid,
-      .system-strip {
+      .three-column,
+      .timeline,
+      .cards {
         grid-template-columns: 1fr;
       }
 
-      .cta-row {
-        flex-direction: column;
-        align-items: flex-start;
+      .step,
+      .step:nth-last-child(-n + 2) {
+        min-height: auto;
+        border-bottom: 1px solid var(--border);
       }
 
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
+      .step:last-child { border-bottom: 0; }
+      .step-number { margin-bottom: 18px; }
+      .card { min-height: auto; }
+      .button { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-    <nav class="nav">
+  <header>
+    <div class="shell nav" role="navigation" aria-label="Main navigation">
       <a class="brand" href="#">
-        <span class="brand-mark">WRH</span>
+        <span class="brand-mark" aria-hidden="true">WRH</span>
         <span>Capitol Contracts LLC</span>
       </a>
-
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#who">Who It Helps</a>
         <a href="#path">System Path</a>
-        <a href="#repos">Top Repos</a>
+        <a href="#repos">Project Hubs</a>
+        <a href="#scope">Scope</a>
         <a href="mailto:capitolcontracts@outlook.com">Contact</a>
       </div>
-    </nav>
+    </div>
+  </header>
 
+  <main id="main">
     <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">Non-Clinical Psychoeducational Curriculum</span>
-        <h1>Structured trauma education with flow, language, and a clear path forward.</h1>
-        <p>
-          <strong>Capitol Contracts LLC</strong> develops the
-          <strong>What Really Happened (WRH)</strong> project system: non-clinical education
-          that teaches survival patterns, addiction cycles, freeze responses, shame loops,
-          and nervous-system adaptation as understandable mechanisms — not character failures.
-        </p>
-        <p>
-          The system connects a lived-experience memoir, public counter-narrative articles,
-          a 5-week introductory track, a 30-session pilot package, and a full 75-session
-          master curriculum for institutional review and implementation planning.
-        </p>
-
-        <div class="cta-row">
-          <a class="btn primary" href="./repo-showcase.html">View Repository Showcase</a>
-          <a class="btn" href="https://github.com/Mave9055/wrh-master-curriculum">Open Master Curriculum</a>
-          <a class="btn" href="mailto:capitolcontracts@outlook.com">Contact Capitol Contracts</a>
-        </div>
-      </div>
-
-      <div class="hero-art" aria-hidden="true">
-        <div class="art-core">
-          <div class="path-orbit">
-            <div class="ring r1"></div>
-            <div class="ring r2"></div>
-            <div class="ring r3"></div>
-            <div class="path-line"></div>
-            <div class="pulse p1"></div>
-            <div class="pulse p2"></div>
-            <div class="pulse p3"></div>
-            <div class="pulse p4"></div>
+      <div class="shell hero-grid">
+        <div>
+          <span class="kicker">Non-Clinical Psychoeducational Curriculum</span>
+          <h1>Structured trauma education with flow, language, and a clear path forward.</h1>
+          <p class="lead">
+            Capitol Contracts LLC develops the What Really Happened project system: non-clinical education that explains survival patterns, addiction cycles, freeze responses, shame loops, and nervous-system adaptation as understandable mechanisms.
+          </p>
+          <p class="lead">
+            The ecosystem connects a memoir, public counter-narrative articles, a 5-week introduction, a 30-session pilot package, and a full 75-session master curriculum for institutional review and implementation planning.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="./repo-showcase.html">View Repository Showcase</a>
+            <a class="button" href="https://github.com/Mave9055/wrh-master-curriculum">Open Curriculum</a>
           </div>
         </div>
-        <div class="art-caption">
-          <span>Storm → Fire → Structure</span>
-          <span>Pattern Recognition / Language / Support / Implementation</span>
-        </div>
+
+        <aside class="hero-aside" aria-label="System summary">
+          <h2>Designed for serious review.</h2>
+          <p>
+            Built for programs, advisors, reviewers, and institutional partners that need structured language without therapy-style disclosure requirements.
+          </p>
+          <ul class="meta-list">
+            <li><strong>Primary use</strong><span>Education</span></li>
+            <li><strong>Delivery frame</strong><span>Non-clinical</span></li>
+            <li><strong>Core path</strong><span>Memoir → Curriculum</span></li>
+            <li><strong>Contact</strong><span>capitolcontracts@outlook.com</span></li>
+          </ul>
+        </aside>
       </div>
     </section>
 
     <section class="section" id="about">
-      <div class="section-head">
-        <h2>What this is</h2>
-        <p>
-          WRH is a public-facing system built to make hard patterns visible. The memoir provides the source story.
-          The articles translate the language. The core track introduces the framework. The pilot and master curriculum
-          make it usable for programs, peers, and institutional partners.
-        </p>
-      </div>
-
-      <div class="flow-band">
-        <div class="audience-grid">
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Memoir + Meaning</h3>
-            <p>The personal narrative source behind the larger WRH framework.</p>
-          </div>
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Public Education</h3>
-            <p>Plain-language counter-narratives that reframe shame, freeze, addiction, and survival behavior.</p>
-          </div>
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Implementation Path</h3>
-            <p>Structured tracks that move from entry-level exposure to a full master curriculum.</p>
-          </div>
+      <div class="shell">
+        <div class="section-head">
+          <h2>One system, multiple entry points.</h2>
+          <p>
+            WRH is organized so different audiences can enter at the right depth. Everyday readers can begin with the memoir and articles. Organizations can begin with the pilot package or master curriculum.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="who">
-      <div class="section-head">
-        <h2>Who it helps</h2>
-        <p>
-          The system is designed for organizations that need clear trauma education without requiring
-          therapy participation, trauma disclosure, or diagnostic framing.
-        </p>
-      </div>
-
-      <div class="flow-band">
-        <div class="audience-grid">
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Recovery & Reentry Programs</h3>
-            <p>Plain-language education for shame, avoidance, relapse patterns, shutdown, accountability, and survival behavior.</p>
+        <div class="three-column">
+          <div class="plain-block">
+            <h3>Human source</h3>
+            <p>The memoir provides the lived-experience foundation and emotional truth behind the larger system.</p>
           </div>
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Veteran-Support Organizations</h3>
-            <p>Mechanism-first language for guarded audiences who may resist therapy-style framing.</p>
+          <div class="plain-block">
+            <h3>Public translation</h3>
+            <p>The articles translate shame, freeze, addiction, and survival responses into plain-language counter-narratives.</p>
           </div>
-          <div class="audience-item">
-            <div class="mini-line"></div>
-            <h3>Peer & Community Programs</h3>
-            <p>Facilitator-ready tools for structured discussion, pattern recognition, and non-clinical support.</p>
+          <div class="plain-block">
+            <h3>Institutional structure</h3>
+            <p>The curriculum packages turn the language into repeatable, reviewable, non-clinical education tools.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="path">
-      <div class="section-head">
-        <h2>The system path</h2>
-        <p>
-          This is not a pile of disconnected projects. It is one path with a clear sequence from lived story
-          to public language to structured curriculum and organizational use.
-        </p>
-      </div>
+      <div class="shell">
+        <div class="section-head">
+          <h2>The six-step system path.</h2>
+          <p>
+            This sequence keeps the ecosystem understandable. Each piece has a role, from story to public language to field-tested implementation and full curriculum architecture.
+          </p>
+        </div>
 
-      <div class="system-strip">
-        <div class="step"><div class="step-num">Step 1</div><h3>Memoir</h3><p>From the Storm to the Fire provides the lived story and source material.</p></div>
-        <div class="step"><div class="step-num">Step 2</div><h3>Articles</h3><p>Counter-narratives turn survival patterns into usable plain language.</p></div>
-        <div class="step"><div class="step-num">Step 3</div><h3>Top 10 Core</h3><p>A shorter 5-week introduction to the WRH language and core ideas.</p></div>
-        <div class="step"><div class="step-num">Step 4</div><h3>Pilot Package</h3><p>A 30-session structure for field testing, review, and implementation planning.</p></div>
-        <div class="step"><div class="step-num">Step 5</div><h3>Master Curriculum</h3><p>The full 75-session architecture for deeper program adoption and delivery.</p></div>
-        <div class="step"><div class="step-num">Step 6</div><h3>Capitol Contracts LLC</h3><p>The business and implementation vehicle behind the public ecosystem.</p></div>
+        <div class="timeline" aria-label="Six-step WRH system path">
+          <article class="step">
+            <div class="step-number">Step 01</div>
+            <h3>Memoir</h3>
+            <p>From the Storm to the Fire provides the source story and lived-experience foundation.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">Step 02</div>
+            <h3>Articles</h3>
+            <p>Counter-narratives translate survival patterns into language readers can recognize.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">Step 03</div>
+            <h3>Top 10 Core</h3>
+            <p>A five-week introductory track for first exposure to the WRH framework.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">Step 04</div>
+            <h3>Pilot Package</h3>
+            <p>A thirty-session structure for field testing, review, and implementation planning.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">Step 05</div>
+            <h3>Master Curriculum</h3>
+            <p>The full seventy-five-session architecture for deeper program adoption.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">Step 06</div>
+            <h3>Capitol Contracts</h3>
+            <p>The business and implementation vehicle for partner conversations and public materials.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section class="section" id="repos">
-      <div class="section-head">
-        <h2>Main public pathways</h2>
-        <p>
-          These are the strongest public entry points for first-time visitors, buyers, advisors, and partner organizations.
-        </p>
-      </div>
-
-      <div class="repo-flow">
-        <div class="flow-band repo-list">
-          <div class="repo-row"><div class="name">Repository Showcase</div><div class="desc">The fastest way to understand the whole ecosystem and how the major repos connect.</div><a href="./repo-showcase.html">Open →</a></div>
-          <div class="repo-row"><div class="name">WRH Master Curriculum</div><div class="desc">The flagship 75-session curriculum and the strongest institutional review path.</div><a href="https://github.com/Mave9055/wrh-master-curriculum">Open →</a></div>
-          <div class="repo-row"><div class="name">WRH Pilot Package</div><div class="desc">The 30-session implementation and field-test structure.</div><a href="https://github.com/Mave9055/WRH-Pilot-Deployment-Package">Open →</a></div>
-          <div class="repo-row"><div class="name">Top 10 Core</div><div class="desc">The shorter 5-week entry track for first-step exposure and public use.</div><a href="https://github.com/Mave9055/top-10-core">Open →</a></div>
-          <div class="repo-row"><div class="name">The Rescue Boat</div><div class="desc">Public counter-narrative articles that translate trauma and survival patterns into plain language.</div><a href="https://mave9055.github.io/ebook-manuscript/">Open →</a></div>
-        </div>
-
-        <aside class="repo-side">
-          <h3>Best first-time visitor path</h3>
-          <p>If someone is seeing this for the first time, this is the cleanest order:</p>
-          <ul>
-            <li>Main hub</li>
-            <li>Repository showcase</li>
-            <li>WRH Master Curriculum</li>
-            <li>WRH Pilot Deployment Package</li>
-            <li>Capitol Contracts LLC</li>
-          </ul>
-          <p style="margin-top:14px;">
-            For memoir context, the book and article repos provide the narrative and public language behind the curriculum system.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="cta-panel">
-        <div>
-          <h2>Want the clearest next step?</h2>
+      <div class="shell">
+        <div class="section-head">
+          <h2>Primary project hubs.</h2>
           <p>
-            Start with the repository showcase if you want the map. Start with the master curriculum if you want the flagship structure.
-            Contact Capitol Contracts if you want to discuss pilots, implementation, or public-facing materials.
+            These are the cleanest public entry points for first-time visitors, reviewers, program leaders, and institutional buyers.
           </p>
-          <div class="scope">
-            <strong>Scope Boundary:</strong> WRH materials are non-clinical psychoeducational resources.
-            They are not therapy, medical care, diagnosis, crisis care, legal advice, or a substitute for licensed professional support.
-          </div>
         </div>
 
-        <div class="cta-row" style="margin-top:0;">
-          <a class="btn primary" href="./repo-showcase.html">Start Here</a>
-          <a class="btn" href="mailto:capitolcontracts@outlook.com">Email Contact</a>
+        <div class="cards">
+          <article class="card">
+            <div class="card-tag">Start Here</div>
+            <h3>Repository Showcase</h3>
+            <p>The fastest overview of the ecosystem, the major repositories, and how the pieces connect.</p>
+            <div class="button-row"><a class="button primary" href="./repo-showcase.html">View Showcase</a></div>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Flagship Asset</div>
+            <h3>WRH Master Curriculum</h3>
+            <p>The full seventy-five-session curriculum and strongest institutional review path.</p>
+            <div class="button-row"><a class="button primary" href="https://github.com/Mave9055/wrh-master-curriculum">Open Curriculum</a></div>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Implementation</div>
+            <h3>WRH Pilot Package</h3>
+            <p>The thirty-session deployment package for field testing and partner review.</p>
+            <div class="button-row"><a class="button primary" href="https://github.com/Mave9055/WRH-Pilot-Deployment-Package">Open Pilot</a></div>
+          </article>
+
+          <article class="card">
+            <div class="card-tag">Public Language</div>
+            <h3>The Rescue Boat</h3>
+            <p>Public counter-narrative articles that translate trauma and survival patterns into readable language.</p>
+            <div class="button-row"><a class="button primary" href="https://mave9055.github.io/ebook-manuscript/">Open Articles</a></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <footer>
-      <span>© 2026 Capitol Contracts LLC / Daniel “Bret” Lingar</span>
-      <span>WRH Project System / Structured Non-Clinical Trauma Education</span>
-    </footer>
+    <section class="section" id="scope">
+      <div class="shell">
+        <div class="scope-box">
+          <h2>Scope Boundary</h2>
+          <p>
+            WRH materials are non-clinical psychoeducational resources. They are not therapy, medical care, diagnosis, crisis care, legal advice, or a substitute for licensed professional support.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="shell footer-grid">
+      <div>
+        <h2>Capitol Contracts LLC / WRH Project System</h2>
+        <p>Structured non-clinical trauma education for recovery, veteran-support, reentry, peer-support, and institutional training partners.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="./repo-showcase.html">Repository Showcase</a>
+        <a href="https://github.com/Mave9055/wrh-master-curriculum">Master Curriculum</a>
+        <a href="https://github.com/Mave9055/capitol-contracts">Capitol Contracts Repository</a>
+        <a href="mailto:capitolcontracts@outlook.com">capitolcontracts@outlook.com</a>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>
